@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Stock Treader</title>
+
+<!-- ============================================================
+     ตั้งค่า URL ของ Apps Script Web App ตรงนี้ที่เดียว
+     ตัวอย่าง: "https://script.google.com/macros/s/AKfycb.../exec"
+     ============================================================ -->
+<script>
+  const WEBAPP_URL = "PUT_YOUR_APPS_SCRIPT_WEBAPP_URL_HERE";
+</script>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+
+<!-- Add to Home Screen (iOS) -->
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Stock Treader">
+
+<!-- Add to Home Screen (Android / PWA) -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1420">
+
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0d1420;
+    overflow: hidden;
+  }
+  #frame-wrap {
+    position: fixed;
+    inset: 0;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: #0d1420;
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  #setup-msg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    color: #e8ecf1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+  }
+  #setup-msg code {
+    background: #1c2430;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div id="frame-wrap">
+  <iframe id="app-frame" src="" title="Stock Treader" allow="clipboard-write"></iframe>
+</div>
+
+<div id="setup-msg">
+  <div>
+    ยังไม่ได้ตั้งค่า Apps Script Web App URL<br><br>
+    แก้ค่า <code>WEBAPP_URL</code> ใน <code>index.html</code><br>
+    ให้เป็นลิงก์ .../exec ของ Web App ที่ deploy ไว้
+  </div>
+</div>
+
+<script>
+  if (!WEBAPP_URL || WEBAPP_URL.indexOf("PUT_YOUR_APPS_SCRIPT") === 0) {
+    document.getElementById('frame-wrap').style.display = 'none';
+    document.getElementById('setup-msg').style.display = 'flex';
+  } else {
+    document.getElementById('app-frame').src = WEBAPP_URL;
+  }
+</script>
+
+</body>
+</html>
